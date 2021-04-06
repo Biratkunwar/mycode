@@ -7,7 +7,7 @@ def main():
 
     # api goes here
     # example:
-    api = "http://api.open-notify.org/astros.json"
+    api = "https://pokeapi.co/api/v2/pokemon/pikachu"
     #api = "http://"   # <--- you have to fill in this!
 
     # sent HTTP GET and create resp, a response object
@@ -18,12 +18,12 @@ def main():
     respdata = resp.json()
 
     # display ALL of the data we captured
-    print(respdata)
+    # print(respdata)
 
 
     # spend some time working with dataset
     # see if you can return the data in an interesting format
     # (make it more readable)
-    print(respdata.get("people"))
+    print(respdata.get("abilities"))
 
 main()
