@@ -6,10 +6,10 @@ import csv
 def main():
     # open our csv data
     with open("csv_users.txt", "r") as f:
-        i = 0
+        i = 0 # start a simple loop counter
         # loop across all of our csv data
         for row in csv.reader(f):
-            i = i + 1
+            i = i + 1 # simple counter (how many times through the loop)
             filename = f"admin.rc{i}"    # f-string -- fill in {} with var value
             
             # create the admin.rc{i} file
