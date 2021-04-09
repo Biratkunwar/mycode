@@ -1,0 +1,61 @@
+#!/usr/zach/byrequest/suggestions
+
+Oracle Virtual Box
+    - Free
+    - Lets you build linux machines (i.e. SSH hosts)
+    - DL Ubuntu 20.04 (server NOT desktop) // CentOS (free RHEL)
+    - spin up 2 or 3 Ubuntu hosts to use as targets
+    - practice making python SSH to those hosts
+        - passwords
+        - rsa keys
+        
+Python to Cisco NX-OS (et al.)
+    - See Lab 57
+    
+Wireshark / TCPDump
+    - be proficient in *.pcaps
+    - tcpdump from command line
+    - view in wireshark (example: search for HTTP request / response)
+    - IP layer 3
+    - TCP / UDP (ports) layer 4
+    - HTTP layer 7
+    
+
+RESTful APIs
+    - HTTP request / response
+    - https://tools.ietf.org/html/rfc7231
+    - REST
+    - https://roy.gbiv.com/pubs/dissertation/rest_arch_style.htm
+    - Flask (or Django... or both!) # server side (how to make APIs)
+    - to Cisco (see cisco lab... again...)
+    - to Clouds (AWS or Azure)
+    
+SSH
+    - paramiko -- be able to talk... no need to be an expert
+    - openSSH -- READ ABOUT THIS!
+    - cd ~/.ssh/
+        - config
+        - authorized users
+        - id_rsa
+        - id_rsa.pub
+        
+SCM
+    - git **EVERYONE NEEDS THIS
+    - github **EVERYONE NEEDS THIS
+    - gitlab
+    - bitbucket
+    
+Favorite IDE
+    - Notepad++ / github desktop
+    - atom.io
+    - vs studio for python etc etc
+    
+Ansible
+    - super abstracted python
+    - SSH
+        - to hosts (other VMs)
+        - to network devices
+    - HTTP
+        - to network devices
+        - to clouds
+        - to anything else with an API
