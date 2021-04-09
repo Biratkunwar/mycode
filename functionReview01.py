@@ -3,10 +3,9 @@
 
 import json
 
-import crayons
-
 # function to push commands
 def commandpush(devicecmd): # devicecmd==list
+    """runs the commands passed as devicecmd"""
     for coffeetime in devicecmd.keys():
         print('Handshaking. .. ... connecting with ' + coffeetime )
         # we'll learn to write code that connects to devices here
@@ -15,13 +14,15 @@ def commandpush(devicecmd): # devicecmd==list
             # we'll learn to write code that sends cmds to device here
 
 def commandget(fileloc):
-    with open(fileloc, "r") as f:
+    """grabs the commands from a file passed in as fileloc"""
+    with open(fileloc, "r") as cmdfile:
         # load the JSON file as python lists / dicts
-        cmdstoissue = json.load(f)
+        cmdstoissue = json.load(cmdfile)
     return cmdstoissue
 
 # start our main script
 def main():
+    """runtime code"""
     fileloc = input("name of file to read commands from?")
 
     # call our function 'commandget()' and pass it the location of the file the
@@ -38,4 +39,3 @@ def main():
 
 # call our main function
 main()
-
