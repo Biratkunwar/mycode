@@ -58,12 +58,19 @@ def harvestkey():
     with open("/home/student/omdb.key") as apikeyfile:
         return apikeyfile.read().rstrip("\n") # grab the api key out of omdb.key
 
+# Print contents of the local sqliteDB
 def printlocaldb():
-    pass
-    #cursor = conn.execute("SELECT * from MOVIES")
-    #for row in cursor:
-    #    print("MOVIE = ", row[0])
-    #    print("YEAR = ", row[1])
+    try:
+        conn = sqlite3.connect('mymovie.db')   # connect to local sqliteDB
+        cursor = conn.execute("SELECT * from MOVIES") # all data from table MOVIES
+        for row in cursor:
+            print("MOVIE = ", row[0])   
+            print("YEAR = ", row[1])
+        return True
+    except:
+        return False
+    finally:
+        conn.close()   # in all cases close connection to DB
 
 
 def main():
@@ -73,20 +80,24 @@ def main():
     # read the API key out of a file in the home directory
     mykey = harvestkey()
 
+    # enter a loop condition with menu prompting
     while True:
+        # initialize answer
         answer = ""
         while answer == "":
             print("""\n**** Welcome to the OMDB Movie Client and DB ****
             ** Returned data will be written into the local database **
             1) Search for All Movies Containing String
-            2) Search for Movies Containg String and by Type
-            3) Search for Movies Containing String and by Year
-            4) Search for Movie Containing String, and by Type, and by Year 
+            2) Search for Movies Containing String, and by Type
+            3) Search for Movies Containing String, and by Year
+            4) Search for Movies Containing String, and by Type, and by Year
+            5) Display contents of the local movie database
             99) Exit""")
 
             answer = input("> ")
 
         if answer in ["1", "2", "3", "4"]:
+            # All searches require a string to include in the search
             searchstring = input("Search all movies in the OMDB. Enter search string: ")
 
             if answer == "1":
@@ -103,7 +114,6 @@ def main():
                 vtype = vtype.lower()
                 year = input("What is the year of release? ")
                 resp = movielookup(mykey, searchstring, year=year, vtype=vtype)
-
             if resp:
                 # display the results
                 resp = resp.get("Search")
@@ -113,13 +123,14 @@ def main():
             else:
                 print("That search did not return any results.")
 
+        # display contents of local database
+        elif answer == "5":
+            printlocaldb()
 
-
-
+        # user wants to exit
         elif answer == "99":
             print("See you next time!")
             break
 
 if __name__ == "__main__":
     main()
-

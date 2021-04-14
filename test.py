@@ -11,21 +11,13 @@ import requests
 OMDBURL = "http://www.omdbapi.com/?"
 
 # search for all movies containing string
-def movielookup(mykey, searchstring, year = None, vtype = None):
+def movielookup(mykey, searchstring):
     """Interactions with OMDB API
        mykey = omdb api key
-       searchstring = string to search for
-       year = optional search year
-       vtype = optional video type. Valid options [episode, series, movie]"""
+       searchstring = string to search for"""
     try:
         # begin constructing API
         api = f"{OMDBURL}apikey={mykey}&s={searchstring}"
-        # user is also searching by year
-        if year:
-            api = api + f"&y={year}"
-        # user is also searching by video type
-        if vtype == "movie" or vtype == "series" or vtype == "episode":
-            api = api + f"&type={vtype}"
 
         ## open URL to return 200 response
         resp = requests.get(api)
@@ -68,42 +60,32 @@ def printlocaldb():
 
 def main():
 
-    print("Particulating Splines...")
-
     # read the API key out of a file in the home directory
     mykey = harvestkey()
 
+    # enter a loop condition with menu prompting
     while True:
+        # initialize answer
         answer = ""
         while answer == "":
             print("""\n**** Welcome to the OMDB Movie Client and DB ****
             ** Returned data will be written into the local database **
             1) Search for All Movies Containing String
-            2) Search for Movies Containg String and by Type
-            3) Search for Movies Containing String and by Year
-            4) Search for Movie Containing String, and by Type, and by Year 
+            2) Search for Movies Containing String, and by Type
             99) Exit""")
 
-            answer = input("> ")
+            answer = input("> ") # collect an answer for testing
 
-        if answer in ["1", "2", "3", "4"]:
+        # testing the answer
+        if answer in ["1", "2"]:
+            # All searches require a string to include in the search
             searchstring = input("Search all movies in the OMDB. Enter search string: ")
 
             if answer == "1":
                 resp = movielookup(mykey, searchstring)
             elif answer == "2":
-                vtype = input("Search by episode, series, or movie? (enter one): ")
-                vtype = vtype.lower()
-                resp = movielookup(mykey, searchstring, vtype=vtype)
-            elif answer == "3":
-                year = input("What is the year of release? ")
-                resp = movielookup(mykey, searchstring, year=year)
-            elif answer == "4":
-                vtype = input("Search by episode, series, or movie? (enter one): ")
-                vtype = vtype.lower()
-                year = input("What is the year of release? ")
-                resp = movielookup(mykey, searchstring, year=year, vtype=vtype)
-
+                print("\nSearch by type coming soon!\n") # maybe you can write this code!
+                continue                                 # restart the while loop
             if resp:
                 # display the results
                 resp = resp.get("Search")
@@ -113,9 +95,7 @@ def main():
             else:
                 print("That search did not return any results.")
 
-
-
-
+        # user wants to exit
         elif answer == "99":
             print("See you next time!")
             break
